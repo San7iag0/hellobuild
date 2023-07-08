@@ -1,10 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
+
 import './App.scss';
+import { Login } from './components/pages/Login/Login';
+
 
 function App() {
+
   return (
-    <>hola mundo cruel</>
+    <div>
+      <Login></Login>
+    </div>
   );
 }
 
