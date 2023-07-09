@@ -19,14 +19,30 @@ export const InputMui = ({variant, label, type, style}: InputProps)  => {
                     variant={variant}
                     type={type}
                     sx={{
-                        // backgroundColor: 'rgba(0,0,0,.5)',
-                        // borderBottom: '1px solid #fff',
+                        backgroundColor: 'rgba(0,0,0,.1)',
+                        borderBottom: '1px solid #fff' 
+                    }}
+                    inputProps={{
+                        sx: {
+                          color: '#fff',
+                          paddingLeft: '15px',
+                          fontSize: '20px',
+
+                          '&:hover fieldset': {
+                            border: '2px solid blue!important',
+                            borderRadius: 0,
+                          },
+                          '&:focus-within fieldset, &:focus-visible fieldset': {
+                            border: '4px solid red!important',
+                          },
+                        },
                     }}
                     InputLabelProps={{
-                        sx: {
-                        //   color: '#fff',
+                    sx: {
+                        color: '#fff',
                         textTransform: 'capitalize',
-                        },
+                        fontSize: '20px',
+                    },
                     }}
                 />
             </Stack>

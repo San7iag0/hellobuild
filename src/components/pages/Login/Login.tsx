@@ -1,29 +1,24 @@
 import './Login.scss'
-import { ButtonMui } from "../../UI/atoms/ButtonMui"
-import { InputMui } from "../../UI/atoms/InputMui"
+import { useState } from "react"
+import { SignIn } from "./SignIn/SignIn"
+import { SignUp } from "./SignUp/SignUp"
+import { ButtonMui } from "../../UI/atoms/ButtonMui";
 
 export const Login = () => {
-    return (
-        <div className="container">
-            <h2>Login</h2>
-            <div className="container__form">
-                <InputMui
-                    style={{width: '65%'}}
-                    type='text'
-                    variant='standard'
-                    label='Name'
-                ></InputMui>
-                <InputMui
-                    style={{width: '65%'}}
-                    type='password'
-                    variant='standard'
-                    label='Password'
-                ></InputMui>
+    const [ sign, setSign ] = useState('in');
+
+    const handleClick = (str:string) => {
+        setSign(str);
+        console.log(sign);
+    }
+
+    return(
+        <>
+            <div className="btns">
+                <ButtonMui onClick={() => handleClick('in')} variant='outlined'>Sign In</ButtonMui>
+                <ButtonMui onClick={() => handleClick('up')} variant='outlined'>Sign Up</ButtonMui>
             </div>
-            <div className="container__btns">
-                <ButtonMui variant='contained'>Login</ButtonMui>
-                <ButtonMui variant='contained'>sign Up</ButtonMui>
-            </div>
-        </div>
+            {sign === 'in' ? <SignIn></SignIn> :  <SignUp></SignUp>}
+        </>
     )
 }

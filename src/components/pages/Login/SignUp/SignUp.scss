@@ -1,0 +1,38 @@
+body{
+    width: 98vw;
+    height: 98vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    height: auto;
+    width: 500px;
+    border-radius: 10px;
+    display: grid;
+    grid-gap: 35px;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+
+    h2{
+        color: #fff;
+        text-align: center;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+    }
+
+    &__btns{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 45px;
+    }
+}
