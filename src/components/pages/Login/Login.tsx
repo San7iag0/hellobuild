@@ -8,13 +8,15 @@ export const Login = () => {
             <h2>Login</h2>
             <div className="container__form">
                 <InputMui
+                    style={{width: '65%'}}
                     type='text'
-                    variant='filled'
+                    variant='standard'
                     label='Name'
                 ></InputMui>
                 <InputMui
+                    style={{width: '65%'}}
                     type='password'
-                    variant='filled'
+                    variant='standard'
                     label='Password'
                 ></InputMui>
             </div>

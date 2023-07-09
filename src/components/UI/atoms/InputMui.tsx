@@ -7,26 +7,29 @@ interface InputProps {
     variant: InputVariant;
     label: string;
     type: InputType
+    style: any
 }
 
-export const InputMui = ({variant, label, type}: InputProps)  => {
+export const InputMui = ({variant, label, type, style}: InputProps)  => {
     return (
-        <Stack spacing={2} >
-           <TextField 
-                label={label} 
-                variant={variant} 
-                type={type} 
-                sx={{
-                    backgroundColor: 'rgba(0,0,0,.5)',
-                    borderBottom: '1px solid #fff',
-                  }}
-                  InputLabelProps={{
-                    sx: {
-                      color: '#fff',
-                      textTransform: 'capitalize',
-                    },
-                  }}
-            />
-        </Stack>
+        <div style={style}>
+            <Stack spacing={3}>
+            <TextField
+                    label={label}
+                    variant={variant}
+                    type={type}
+                    sx={{
+                        // backgroundColor: 'rgba(0,0,0,.5)',
+                        // borderBottom: '1px solid #fff',
+                    }}
+                    InputLabelProps={{
+                        sx: {
+                        //   color: '#fff',
+                        textTransform: 'capitalize',
+                        },
+                    }}
+                />
+            </Stack>
+        </div>
     )
 }
