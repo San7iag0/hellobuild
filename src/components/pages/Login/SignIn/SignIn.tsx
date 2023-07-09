@@ -14,10 +14,7 @@ export const SignIn = () => {
 
     initializeApp(firebaseConfig.firebaseConfig)
 
-    const handleClick = () => {
-        console.log('hola amigos');
-    }
-
+    const message = 'The Email and password you entered did not match our records, Please try again';
     const navigate = useNavigate();
     const handleLogin = async () => {
         try {

@@ -3,13 +3,13 @@ import { useState } from "react"
 import { SignIn } from "./SignIn/SignIn"
 import { SignUp } from "./SignUp/SignUp"
 import { ButtonMui } from "../../UI/atoms/ButtonMui";
+import { Alert, Snackbar } from '@mui/material';
 
 export const Login = () => {
     const [ sign, setSign ] = useState('in');
 
     const handleClick = (str:string) => {
         setSign(str);
-        console.log(sign);
     }
 
     return(
