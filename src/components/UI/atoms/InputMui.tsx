@@ -6,11 +6,12 @@ type InputType = "text" | "password" | "number" | "search";
 interface InputProps {
     variant: InputVariant;
     label: string;
-    type: InputType
-    style: any
+    type: InputType;
+    style: any;
+    onChange: (str: string) => void;
 }
 
-export const InputMui = ({variant, label, type, style}: InputProps)  => {
+export const InputMui = ({ variant, label, type, style, onChange }: InputProps)  => {
     return (
         <div style={style}>
             <Stack spacing={3}>
@@ -18,6 +19,7 @@ export const InputMui = ({variant, label, type, style}: InputProps)  => {
                     label={label}
                     variant={variant}
                     type={type}
+                    onChange={event => onChange(event.target.value)}
                     sx={{
                         backgroundColor: 'rgba(0,0,0,.1)',
                         borderBottom: '1px solid #fff' 

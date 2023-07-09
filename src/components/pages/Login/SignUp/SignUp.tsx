@@ -1,8 +1,12 @@
 import './SignUp.scss'
 import { ButtonMui } from "../../../UI/atoms/ButtonMui"
 import { InputMui } from "../../../UI/atoms/InputMui"
+import { useState } from 'react';
 
 export const SignUp = () => {
+
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
 
     const handleClick = () => {
         console.log('hola amigos');
@@ -17,12 +21,14 @@ export const SignUp = () => {
                     type='text'
                     variant='standard'
                     label='Name'
+                    onChange={(event) => setEmail(event)}
                 ></InputMui>
                 <InputMui
                     style={{width: '65%'}}
                     type='password'
                     variant='standard'
                     label='Password'
+                    onChange={(event) => setPassword(event)}
                 ></InputMui>
             </div>
             <div className="container__btns">
