@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/Home"
           element={
             <AuthGuard>
               <Home/>
@@ -19,7 +19,7 @@ function App() {
           }
         />
         <Route 
-          path="/login" 
+          path="*" 
           element={<Login /> }
         />
       </Routes>

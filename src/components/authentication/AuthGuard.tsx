@@ -2,7 +2,6 @@ import type { FC, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import firebase from 'firebase/app'
 
 interface AuthGuardProps {
     children: ReactNode
@@ -18,6 +17,8 @@ const AuthGuard: FC<AuthGuardProps> = props => {
       const AuthCheck = onAuthStateChanged(auth, (user) => {
           if (user) {
               setLoading(false);
+              console.log('authorized ', user);
+              
           } else {
               console.log('unauthorized');
               nav('/login');
