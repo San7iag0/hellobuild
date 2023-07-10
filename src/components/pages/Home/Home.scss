@@ -5,6 +5,7 @@
 
 .homeContainer{
     height: 250px;
+    min-width: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,4 +21,12 @@
     grid-gap: 10px;
     max-height: 400px;
     overflow: scroll;
+}
+
+.logOut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
 }

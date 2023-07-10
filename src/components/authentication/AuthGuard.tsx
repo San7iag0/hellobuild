@@ -17,6 +17,8 @@ const AuthGuard: FC<AuthGuardProps> = props => {
       const AuthCheck = onAuthStateChanged(auth, (user) => {
           if (user) {
               setLoading(false);
+              console.log('authorized ', user);
+              
           } else {
               console.log('unauthorized');
               nav('/login');

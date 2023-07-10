@@ -4,6 +4,8 @@ import { InputMui } from "../../UI/atoms/InputMui"
 import { getRepositories } from "../../../api/services/GitHubService";
 import { ButtonMui } from "../../UI/atoms/ButtonMui";
 import { Repo } from '../../repo/Repo';
+import { getAuth, signOut } from "firebase/auth";
+import { ExitToApp } from '@mui/icons-material';
 
 interface Repository {
     name: string;
@@ -15,10 +17,10 @@ export const Home = () => {
 
     const [userName, setUserName] = useState('');
     const [repos, setRepos] = useState<Repository[]>([]);
+    const auth = getAuth();
 
-    const handleChange = (e: any) => {
-        setUserName(e)
-        console.log(userName);
+    const handleChange = (event: any) => {
+        setUserName(event)
     }
 
     const handleSearch = (name: string) => {
@@ -26,7 +28,6 @@ export const Home = () => {
         getRepositories(name)
             .then((repositories: Repository[]) => {
                 setRepos(repositories)
-                console.log('Repositories:', repos);
             })
             .catch((error: Error) => {
                 console.error('Error:', error);
@@ -65,6 +66,10 @@ export const Home = () => {
                         }) : ''
                     }
                 </div>
+            </div>
+            <div className="logOut" onClick={() => signOut(auth)}>
+                <h3>Sign out</h3>
+                <ExitToApp />   
             </div>
         </>
     )
