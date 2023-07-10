@@ -2,7 +2,6 @@ import type { FC, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import firebase from 'firebase/app'
 
 interface AuthGuardProps {
     children: ReactNode

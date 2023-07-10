@@ -9,10 +9,6 @@ export const SignUp = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
 
-    const handleClick = () => {
-        console.log('hola amigos');
-    }
-
     const createAccount = async () => {
         try {
           await auth.createUserWithEmailAndPassword(email, password);
@@ -23,9 +19,9 @@ export const SignUp = () => {
       };
 
     return (
-        <div className="container">
+        <div className="loginCcontainer">
             <h2>Sign Up</h2>
-            <div className="container__form">
+            <div className="loginCcontainer__form">
                 <InputMui
                     style={{width: '65%'}}
                     type='text'
@@ -41,7 +37,7 @@ export const SignUp = () => {
                     onChange={(event) => setPassword(event)}
                 ></InputMui>
             </div>
-            <div className="container__btns">
+            <div className="loginCcontainer__btns">
                 <ButtonMui onClick={createAccount} variant='outlined'>Sign Up</ButtonMui>
             </div>
         </div>

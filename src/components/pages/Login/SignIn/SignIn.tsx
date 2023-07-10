@@ -14,22 +14,21 @@ export const SignIn = () => {
 
     initializeApp(firebaseConfig.firebaseConfig)
 
-    const message = 'The Email and password you entered did not match our records, Please try again';
     const navigate = useNavigate();
     const handleLogin = async () => {
         try {
             await auth.signInWithEmailAndPassword(email, password);
             console.log('Logged in successfully!');
-            navigate('/')
+            navigate('/Home')
         } catch (error) {
             console.error('Error logging in:', error);
         }
     };
 
     return (
-        <div className="container">
+        <div className="loginCcontainer">
             <h2>Sign In</h2>
-            <div className="container__form">
+            <div className="loginCcontainer__form">
                 <InputMui
                     style={{width: '65%'}}
                     type='text'
@@ -45,7 +44,7 @@ export const SignIn = () => {
                     onChange={(event) => setPassword(event)}
                 ></InputMui>
             </div>
-            <div className="container__btns">
+            <div className="loginCcontainer__btns">
                 <ButtonMui onClick={handleLogin} variant='outlined'>Sign In</ButtonMui>
             </div>
         </div>

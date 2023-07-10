@@ -1,0 +1,12 @@
+.homeContainer{
+    height: 250px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
+}
