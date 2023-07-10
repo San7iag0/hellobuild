@@ -3,6 +3,7 @@ import axios from 'axios';
 interface Repository {
   name: string;
   description: string;
+  html_url: string;
 }
 
 // Function to fetch repositories by username
