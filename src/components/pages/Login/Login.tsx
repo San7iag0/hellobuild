@@ -9,7 +9,6 @@ export const Login = () => {
 
     const handleClick = (str:string) => {
         setSign(str);
-        console.log(sign);
     }
 
     return(

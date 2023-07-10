@@ -2,20 +2,26 @@ import './SignUp.scss'
 import { ButtonMui } from "../../../UI/atoms/ButtonMui"
 import { InputMui } from "../../../UI/atoms/InputMui"
 import { useState } from 'react';
+import { auth } from '../../../../firebase';
 
 export const SignUp = () => {
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
 
-    const handleClick = () => {
-        console.log('hola amigos');
-    }
+    const createAccount = async () => {
+        try {
+          await auth.createUserWithEmailAndPassword(email, password);
+          console.log('sign up successfully!');
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     return (
-        <div className="container">
+        <div className="loginCcontainer">
             <h2>Sign Up</h2>
-            <div className="container__form">
+            <div className="loginCcontainer__form">
                 <InputMui
                     style={{width: '65%'}}
                     type='text'
@@ -31,8 +37,8 @@ export const SignUp = () => {
                     onChange={(event) => setPassword(event)}
                 ></InputMui>
             </div>
-            <div className="container__btns">
-                <ButtonMui onClick={handleClick} variant='outlined'>Sign Up</ButtonMui>
+            <div className="loginCcontainer__btns">
+                <ButtonMui onClick={createAccount} variant='outlined'>Sign Up</ButtonMui>
             </div>
         </div>
     )
