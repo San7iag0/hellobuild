@@ -6,11 +6,15 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../../../firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../../firebase';
+import { Alert } from '@mui/material';
+import { TransitionAlerts } from '../../../UI/atoms/AlertMui';
+import { LocalStorageService } from '../../../services/LocalStorageService';
 
 export const SignIn = () => {
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ openAlert, setOpenAlert ] = useState(false);
 
     initializeApp(firebaseConfig.firebaseConfig)
 
@@ -18,15 +22,21 @@ export const SignIn = () => {
     const handleLogin = async () => {
         try {
             await auth.signInWithEmailAndPassword(email, password);
+            LocalStorageService.setItem('login', true);
             console.log('Logged in successfully!');
-            navigate('/Home')
+            navigate('/Home');
         } catch (error) {
+            setOpenAlert(true);
+            console.log(openAlert);
             console.error('Error logging in:', error);
         }
     };
 
     return (
         <div className="loginCcontainer">
+            { 
+                (openAlert) ? <TransitionAlerts severity='error' >You have entered an invalid username or password</TransitionAlerts> : ''
+            }
             <h2>Sign In</h2>
             <div className="loginCcontainer__form">
                 <InputMui

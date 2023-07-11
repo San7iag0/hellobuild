@@ -1,11 +1,13 @@
 import './Home.scss'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputMui } from "../../UI/atoms/InputMui"
 import { getRepositories } from "../../../api/services/GitHubService";
 import { ButtonMui } from "../../UI/atoms/ButtonMui";
 import { Repo } from '../../repo/Repo';
 import { getAuth, signOut } from "firebase/auth";
 import { ExitToApp } from '@mui/icons-material';
+import { TransitionAlerts } from '../../UI/atoms/AlertMui';
+import { LocalStorageService } from '../../services/LocalStorageService';
 
 interface Repository {
     name: string;
@@ -18,6 +20,7 @@ export const Home = () => {
     const [userName, setUserName] = useState('');
     const [repos, setRepos] = useState<Repository[]>([]);
     const auth = getAuth();
+    const login = LocalStorageService.getItem('login');
 
     const handleChange = (event: any) => {
         setUserName(event)
@@ -37,6 +40,9 @@ export const Home = () => {
     return (
         <>
             <div className="homeChildren">
+                {
+                    (login) ? <TransitionAlerts severity='success' >Log in Succesful!!</TransitionAlerts> : ''
+                }
                 <div className="homeContainer">
                     <div className="homeContainer__inputSearch">
                         <InputMui
