@@ -6,11 +6,14 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../../../firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../../firebase';
+import { TransitionAlerts } from '../../../UI/atoms/AlertMui';
+import { LocalStorageService } from '../../../services/LocalStorageService';
 
 export const SignIn = () => {
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ errorAlert, setErrorAlert ] = useState(false);
 
     initializeApp(firebaseConfig.firebaseConfig)
 
@@ -18,26 +21,37 @@ export const SignIn = () => {
     const handleLogin = async () => {
         try {
             await auth.signInWithEmailAndPassword(email, password);
+            LocalStorageService.setItem('login', true);
             console.log('Logged in successfully!');
-            navigate('/Home')
+            navigate('/Home');
         } catch (error) {
-            console.error('Error logging in:', error);
+            console.log('error ', errorAlert);
+            setErrorAlert(true)
         }
     };
 
+    const errorHandelAlert = () => setErrorAlert(false)
+
     return (
         <div className="loginCcontainer">
+            {
+                errorAlert ? 
+                    <button onClick={errorHandelAlert}>
+                        <TransitionAlerts severity='error' >You have entered an invalid username or password</TransitionAlerts> 
+                    </button>
+                    : ''
+            }
             <h2>Sign In</h2>
             <div className="loginCcontainer__form">
                 <InputMui
-                    style={{width: '65%'}}
+                    style={{ width: '65%' }}
                     type='text'
                     variant='standard'
                     label='Name'
                     onChange={(event) => setEmail(event)}
                 ></InputMui>
                 <InputMui
-                    style={{width: '65%'}}
+                    style={{ width: '65%' }}
                     type='password'
                     variant='standard'
                     label='Password'
