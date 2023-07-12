@@ -11,12 +11,12 @@ import { LocalStorageService } from '../../../services/LocalStorageService';
 
 export const SignIn = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ errorAlert, setErrorAlert ] = useState(false);
 
     initializeApp(firebaseConfig.firebaseConfig)
 
-    const login = LocalStorageService.getItem('login');
     const navigate = useNavigate();
     const handleLogin = async () => {
         try {
@@ -25,24 +25,21 @@ export const SignIn = () => {
             console.log('Logged in successfully!');
             navigate('/Home');
         } catch (error) {
-            console.log('error');
-            errorAlert();
+            console.log('error ', errorAlert);
+            setErrorAlert(true)
         }
     };
 
-    const errorAlert = () => {
-        console.log('errorAlert');
-        return (<>
-            <TransitionAlerts 
-                severity='error' >You have entered an invalid username or password
-            </TransitionAlerts>
-        </>)
-    }
+    const errorHandelAlert = () => setErrorAlert(false)
 
     return (
         <div className="loginCcontainer">
             {
-                (login!) ? <TransitionAlerts severity='error' >You have entered an invalid username or password</TransitionAlerts> : ''
+                errorAlert ? 
+                    <button onClick={errorHandelAlert}>
+                        <TransitionAlerts severity='error' >You have entered an invalid username or password</TransitionAlerts> 
+                    </button>
+                    : ''
             }
             <h2>Sign In</h2>
             <div className="loginCcontainer__form">

@@ -19,6 +19,7 @@
         width: 85%;
         display: flex;
         justify-content: flex-end;
+        cursor: pointer;
     }
 }
 
@@ -35,4 +36,8 @@
     align-items: center;
     color: #fff;
     text-align: center;
+
+    h3{
+        cursor: pointer;
+    }
 }
