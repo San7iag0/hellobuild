@@ -1,5 +1,5 @@
 import './Home.scss'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { InputMui } from "../../UI/atoms/InputMui"
 import { getRepositories } from "../../../api/services/GitHubService";
 import { ButtonMui } from "../../UI/atoms/ButtonMui";
@@ -8,7 +8,8 @@ import { getAuth, signOut } from "firebase/auth";
 import { ExitToApp } from '@mui/icons-material';
 import { TransitionAlerts } from '../../UI/atoms/AlertMui';
 import { LocalStorageService } from '../../services/LocalStorageService';
-
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import Tooltip from '@mui/material/Tooltip';
 interface Repository {
     name: string;
     description: string;
@@ -44,6 +45,11 @@ export const Home = () => {
                     (login) ? <TransitionAlerts severity='success' >Log in Succesful!!</TransitionAlerts> : ''
                 }
                 <div className="homeContainer">
+                    <div className="homeContainer__icon">
+                    <Tooltip title="Introduce your GitHub user name to retrieve your repositories.">
+                        <InfoRoundedIcon color="info" />
+                    </Tooltip>
+                    </div>
                     <div className="homeContainer__inputSearch">
                         <InputMui
                             style={{ width: '100%' }}

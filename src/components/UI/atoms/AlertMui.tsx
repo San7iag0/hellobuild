@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
-import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import { LocalStorageService } from '../../services/LocalStorageService';
 
@@ -31,7 +30,7 @@ export const TransitionAlerts = ({children, severity}:Props) => {
               size="small"
               onClick={() => {
                 setOpenAlert(false);
-
+                LocalStorageService.setItem('login', false);
               }}
             >
               <CloseIcon fontSize="inherit" />
