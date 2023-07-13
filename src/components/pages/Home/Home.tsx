@@ -1,5 +1,5 @@
 import './Home.scss'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputMui } from "../../UI/atoms/InputMui"
 import { getRepositories } from "../../../api/services/GitHubService";
 import { ButtonMui } from "../../UI/atoms/ButtonMui";
@@ -22,7 +22,7 @@ export const Home = () => {
     const [repos, setRepos] = useState<Repository[]>([]);
     const auth = getAuth();
     const login = LocalStorageService.getItem('login');
-
+    const SaveLikes = LocalStorageService.getItem('SaveLikes');
     const handleChange = (event: any) => {
         setUserName(event)
     }
@@ -38,12 +38,18 @@ export const Home = () => {
             });
     }
 
+    useEffect(() => {
+        console.log('entre en useeffect ', SaveLikes);
+    }, [SaveLikes])
+
     return (
         <>
             <div className="homeChildren">
+                <div className='homeChildren__alert'>
                 {
                     (login) ? <TransitionAlerts severity='success' >Log in Succesful!!</TransitionAlerts> : ''
                 }
+                </div>
                 <div className="homeContainer">
                     <div className="homeContainer__icon">
                     <Tooltip title="Introduce your GitHub user name to retrieve your repositories.">
@@ -66,6 +72,7 @@ export const Home = () => {
                         </ButtonMui>
                     </div>
                 </div>
+                {/* <Repo name='name' link='link'></Repo> */}
                 <div className="repoContainer">
                     {repos.length > 0 ?
                         repos.map((ele) => {
@@ -77,6 +84,9 @@ export const Home = () => {
                             );
                         }) : ''
                     }
+                </div>
+                <div>
+                    <Repo name='name' link='link'></Repo>
                 </div>
             </div>
             <div className="logOut" onClick={() => signOut(auth)}>

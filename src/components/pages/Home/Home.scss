@@ -1,6 +1,14 @@
 .homeChildren{
     grid-gap: 10px;
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+
+    &__alert{
+        top: 15px;
+        position: absolute;
+        width: 400px;
+    }
 }
 
 .homeContainer{
@@ -14,6 +22,7 @@
     flex-wrap: wrap;
     flex-direction: column;
     gap: 20px;
+    grid-area: 1 /span 3;
 
     &__icon{
         width: 85%;
