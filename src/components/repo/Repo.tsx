@@ -28,14 +28,15 @@ export const Repo = ({name, link, iconHandle, handleHeart}:Props)  => {
             <div className="repo">
                 <div className="repo__repoInfo">
                     <h3>Name: { name } </h3>
-                <div className="repo__heart" onClick={() => setHeart(!heart)}>
-                    {   
-                        iconHandle ?
-                        <FavoriteOutlinedIcon onClick={(event) => handleHeart(repoData)}/>
-                        :
-                        <FavoriteBorderRoundedIcon onClick={(event) => handleHeart(repoData)}/>
-                    }
-                </div>
+                    <div className="repo__heart" onClick={() => setHeart(!heart)}>
+                        {   
+                            heart ?
+                                <FavoriteBorderRoundedIcon onClick={(event) => handleHeart(repoData)}/>
+                            :
+                                <FavoriteOutlinedIcon onClick={(event) => handleHeart(repoData)}/>
+
+                        }
+                    </div>
                     <h5>Link: { link } </h5>
                 </div>
             </div>
