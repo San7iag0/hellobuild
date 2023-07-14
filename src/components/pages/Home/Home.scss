@@ -30,7 +30,7 @@
         cursor: pointer;
     }
 
-    &__inputSearcn{
+    &__inputSearch{
         width: 50%;
     }
 }
@@ -40,6 +40,15 @@
     grid-gap: 10px;
     max-height: 400px;
     overflow: scroll;
+
+    &__icon{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        align-items: center;
+        gap: 15px;
+    }
 
     h4{
         text-align: center;

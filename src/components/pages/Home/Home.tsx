@@ -1,5 +1,5 @@
 import './Home.scss'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { InputMui } from "../../UI/atoms/InputMui"
 import { getRepositories } from "../../../api/services/GitHubService";
 import { ButtonMui } from "../../UI/atoms/ButtonMui";
@@ -19,22 +19,29 @@ export const Home = () => {
 
     const [userName, setUserName] = useState('');
     const [repos, setRepos] = useState<Repository[]>([]);
+    const [ saveData, setSaveData ] = useState<any[]>([]);
+    const [ like, disLike ] = useState(false);
     const auth = getAuth();
     const login = LocalStorageService.getItem('login');
     const handleChange = (event: any) => {
         setUserName(event)
     }
-    const [ saveData, setSaveData ] = useState<any[]>([]);
 
     const addFavRepos = (obj: any) => {
-        setSaveData(data => [...data, obj])
+        //look for ducplications
+        const isDuplicate = saveData.some(data => data.name == obj.name)
+        if(!isDuplicate){
+            setSaveData(data => [...data, obj]);
+        }    
+        console.log(isDuplicate);
+        disLike(true);
     };
 
-    //check
     const removeOpt = (e: any) => {
         console.log(e);
         const name = e.name;
         setSaveData(saveData.filter((item: Repository) => item.name !== name));
+        disLike(false);
     }
 
     const handleSearch = (name: string) => {
@@ -80,11 +87,17 @@ export const Home = () => {
                 </div>
                 { repos.length > 0 ?
                     <div className="repoContainer">
+                    <div className="repoContainer__icon">
                     <h4>Repositories</h4>
+                    <Tooltip title="click the heart so you can save your favorites Repos.">
+                        <InfoRoundedIcon color="info" />
+                    </Tooltip>
+                    </div>
                         {
                             repos.map((ele) => {
                                 return (
                                     <Repo
+                                        iconHandle = {like}
                                         handleHeart={addFavRepos}
                                         name={ele.name}
                                         link={ele.html_url}
@@ -100,6 +113,7 @@ export const Home = () => {
                         {saveData.map((ele) => {
                             return(
                                 <Repo
+                                    iconHandle = {like}
                                     handleHeart={removeOpt}
                                     name={ele.name}
                                     link={ele.link}
