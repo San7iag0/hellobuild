@@ -12,7 +12,6 @@ import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import Tooltip from '@mui/material/Tooltip';
 interface Repository {
     name: string;
-    description: string;
     html_url: string;
 }
 
@@ -22,9 +21,20 @@ export const Home = () => {
     const [repos, setRepos] = useState<Repository[]>([]);
     const auth = getAuth();
     const login = LocalStorageService.getItem('login');
-    const SaveLikes = LocalStorageService.getItem('SaveLikes');
     const handleChange = (event: any) => {
         setUserName(event)
+    }
+    const [ saveData, setSaveData ] = useState<any[]>([]);
+
+    const addFavRepos = (obj: any) => {
+        setSaveData(data => [...data, obj])
+    };
+
+    //check
+    const removeOpt = (e: any) => {
+        console.log(e);
+        const name = e.name;
+        setSaveData(saveData.filter((item: Repository) => item.name !== name));
     }
 
     const handleSearch = (name: string) => {
@@ -37,10 +47,6 @@ export const Home = () => {
                 console.error('Error:', error);
             });
     }
-
-    useEffect(() => {
-        console.log('entre en useeffect ', SaveLikes);
-    }, [SaveLikes])
 
     return (
         <>
@@ -72,22 +78,36 @@ export const Home = () => {
                         </ButtonMui>
                     </div>
                 </div>
-                {/* <Repo name='name' link='link'></Repo> */}
-                <div className="repoContainer">
-                    {repos.length > 0 ?
-                        repos.map((ele) => {
-                            return (
+                { repos.length > 0 ?
+                    <div className="repoContainer">
+                    <h4>Repositories</h4>
+                        {
+                            repos.map((ele) => {
+                                return (
+                                    <Repo
+                                        handleHeart={addFavRepos}
+                                        name={ele.name}
+                                        link={ele.html_url}
+                                    ></Repo>
+                                );
+                            })
+                        }
+                    </div>
+                : '' }
+                { saveData.length > 0 ? 
+                    <div className="repoContainer">
+                    <h4>Favorite Repositories</h4>
+                        {saveData.map((ele) => {
+                            return(
                                 <Repo
+                                    handleHeart={removeOpt}
                                     name={ele.name}
-                                    link={ele.html_url}
+                                    link={ele.link}
                                 ></Repo>
-                            );
-                        }) : ''
-                    }
-                </div>
-                <div>
-                    <Repo name='name' link='link'></Repo>
-                </div>
+                            )
+                        })}
+                    </div>
+                : '' }
             </div>
             <div className="logOut" onClick={() => signOut(auth)}>
                 <h3>Sign out</h3>

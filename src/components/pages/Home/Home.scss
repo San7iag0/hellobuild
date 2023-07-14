@@ -2,7 +2,6 @@
     grid-gap: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
 
     &__alert{
         top: 15px;
@@ -30,6 +29,10 @@
         justify-content: flex-end;
         cursor: pointer;
     }
+
+    &__inputSearcn{
+        width: 50%;
+    }
 }
 
 .repoContainer{
@@ -37,6 +40,12 @@
     grid-gap: 10px;
     max-height: 400px;
     overflow: scroll;
+
+    h4{
+        text-align: center;
+        color: #fff;
+        font-size: 18px;
+    }
 }
 
 .logOut{
