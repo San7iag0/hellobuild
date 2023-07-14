@@ -20,7 +20,6 @@ export const Home = () => {
     const [userName, setUserName] = useState('');
     const [repos, setRepos] = useState<Repository[]>([]);
     const [ saveData, setSaveData ] = useState<any[]>([]);
-    const [ like, disLike ] = useState(false);
     const auth = getAuth();
     const login = LocalStorageService.getItem('login');
     const handleChange = (event: any) => {
@@ -32,20 +31,17 @@ export const Home = () => {
         const isDuplicate = saveData.some(data => data.name == obj.name)
         if(!isDuplicate){
             setSaveData(data => [...data, obj]);
-        }    
-        console.log(isDuplicate);
-        disLike(true);
+        } else {
+            removeOpt(obj);
+        }
     };
 
     const removeOpt = (e: any) => {
-        console.log(e);
         const name = e.name;
         setSaveData(saveData.filter((item: Repository) => item.name !== name));
-        disLike(false);
     }
 
     const handleSearch = (name: string) => {
-        console.log(name);
         getRepositories(name)
             .then((repositories: Repository[]) => {
                 setRepos(repositories)
@@ -64,10 +60,11 @@ export const Home = () => {
                 }
                 </div>
                 <div className="homeContainer">
-                    <div className="homeContainer__icon">
-                    <Tooltip title="Introduce your GitHub user name to retrieve your repositories.">
-                        <InfoRoundedIcon color="info" />
-                    </Tooltip>
+                    <div className="homeContainer__title">
+                        <h2>Introduce your GitHub user name.</h2>
+                        {/* <Tooltip title="Introduce your GitHub user name to retrieve your repositories.">
+                            <InfoRoundedIcon color="info" />
+                        </Tooltip> */}
                     </div>
                     <div className="homeContainer__inputSearch">
                         <InputMui
@@ -89,7 +86,7 @@ export const Home = () => {
                     <div className="repoContainer">
                     <div className="repoContainer__icon">
                     <h4>Repositories</h4>
-                    <Tooltip title="click the heart so you can save your favorites Repos.">
+                    <Tooltip title="By Clicking the heart you can save your Repositories.">
                         <InfoRoundedIcon color="info" />
                     </Tooltip>
                     </div>
@@ -97,7 +94,7 @@ export const Home = () => {
                             repos.map((ele) => {
                                 return (
                                     <Repo
-                                        iconHandle = {like}
+                                        iconHandle = {false}
                                         handleHeart={addFavRepos}
                                         name={ele.name}
                                         link={ele.html_url}
@@ -113,7 +110,7 @@ export const Home = () => {
                         {saveData.map((ele) => {
                             return(
                                 <Repo
-                                    iconHandle = {like}
+                                    iconHandle = {true}
                                     handleHeart={removeOpt}
                                     name={ele.name}
                                     link={ele.link}
