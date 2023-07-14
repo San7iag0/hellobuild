@@ -12,7 +12,6 @@ import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import Tooltip from '@mui/material/Tooltip';
 interface Repository {
     name: string;
-    description: string;
     html_url: string;
 }
 
@@ -20,11 +19,29 @@ export const Home = () => {
 
     const [userName, setUserName] = useState('');
     const [repos, setRepos] = useState<Repository[]>([]);
+    const [ saveData, setSaveData ] = useState<any[]>([]);
+    const [ like, disLike ] = useState(false);
     const auth = getAuth();
     const login = LocalStorageService.getItem('login');
-
     const handleChange = (event: any) => {
         setUserName(event)
+    }
+
+    const addFavRepos = (obj: any) => {
+        //look for ducplications
+        const isDuplicate = saveData.some(data => data.name == obj.name)
+        if(!isDuplicate){
+            setSaveData(data => [...data, obj]);
+        }    
+        console.log(isDuplicate);
+        disLike(true);
+    };
+
+    const removeOpt = (e: any) => {
+        console.log(e);
+        const name = e.name;
+        setSaveData(saveData.filter((item: Repository) => item.name !== name));
+        disLike(false);
     }
 
     const handleSearch = (name: string) => {
@@ -41,9 +58,11 @@ export const Home = () => {
     return (
         <>
             <div className="homeChildren">
+                <div className='homeChildren__alert'>
                 {
                     (login) ? <TransitionAlerts severity='success' >Log in Succesful!!</TransitionAlerts> : ''
                 }
+                </div>
                 <div className="homeContainer">
                     <div className="homeContainer__icon">
                     <Tooltip title="Introduce your GitHub user name to retrieve your repositories.">
@@ -66,18 +85,43 @@ export const Home = () => {
                         </ButtonMui>
                     </div>
                 </div>
-                <div className="repoContainer">
-                    {repos.length > 0 ?
-                        repos.map((ele) => {
-                            return (
+                { repos.length > 0 ?
+                    <div className="repoContainer">
+                    <div className="repoContainer__icon">
+                    <h4>Repositories</h4>
+                    <Tooltip title="click the heart so you can save your favorites Repos.">
+                        <InfoRoundedIcon color="info" />
+                    </Tooltip>
+                    </div>
+                        {
+                            repos.map((ele) => {
+                                return (
+                                    <Repo
+                                        iconHandle = {like}
+                                        handleHeart={addFavRepos}
+                                        name={ele.name}
+                                        link={ele.html_url}
+                                    ></Repo>
+                                );
+                            })
+                        }
+                    </div>
+                : '' }
+                { saveData.length > 0 ? 
+                    <div className="repoContainer">
+                    <h4>Favorite Repositories</h4>
+                        {saveData.map((ele) => {
+                            return(
                                 <Repo
+                                    iconHandle = {like}
+                                    handleHeart={removeOpt}
                                     name={ele.name}
-                                    link={ele.html_url}
+                                    link={ele.link}
                                 ></Repo>
-                            );
-                        }) : ''
-                    }
-                </div>
+                            )
+                        })}
+                    </div>
+                : '' }
             </div>
             <div className="logOut" onClick={() => signOut(auth)}>
                 <h3>Sign out</h3>
