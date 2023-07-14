@@ -1,6 +1,13 @@
 .homeChildren{
     grid-gap: 10px;
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    &__alert{
+        top: 15px;
+        position: absolute;
+        width: 400px;
+    }
 }
 
 .homeContainer{
@@ -14,12 +21,17 @@
     flex-wrap: wrap;
     flex-direction: column;
     gap: 20px;
+    grid-area: 1 /span 3;
 
-    &__icon{
+    &__title{
         width: 85%;
         display: flex;
-        justify-content: flex-end;
-        cursor: pointer;
+        justify-content: center;
+        color: #FFF;
+    }
+
+    &__inputSearch{
+        width: 50%;
     }
 }
 
@@ -28,6 +40,21 @@
     grid-gap: 10px;
     max-height: 400px;
     overflow: scroll;
+
+    &__icon{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        align-items: center;
+        gap: 15px;
+    }
+
+    h4{
+        text-align: center;
+        color: #fff;
+        font-size: 18px;
+    }
 }
 
 .logOut{
