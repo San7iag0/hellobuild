@@ -31,7 +31,7 @@ export const SignIn = () => {
     const errorHandelAlert = () => setErrorAlert(false)
 
     return (
-        <div className="loginCcontainer">
+        <div className="loginContainer">
             {
                 errorAlert ? 
                     <button onClick={errorHandelAlert}>
@@ -40,7 +40,7 @@ export const SignIn = () => {
                     : ''
             }
             <h2>Sign In</h2>
-            <div className="loginCcontainer__form">
+            <div className="loginContainer__form">
                 <InputMui
                     style={{ width: '65%' }}
                     type='text'
@@ -56,7 +56,7 @@ export const SignIn = () => {
                     onChange={(event) => setPassword(event)}
                 ></InputMui>
             </div>
-            <div className="loginCcontainer__btns">
+            <div className="loginContainer__btns">
                 <ButtonMui onClick={handleLogin} variant='outlined'>Sign In</ButtonMui>
             </div>
         </div>
