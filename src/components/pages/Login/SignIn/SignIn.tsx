@@ -22,10 +22,8 @@ export const SignIn = () => {
         try {
             await auth.signInWithEmailAndPassword(email, password);
             LocalStorageService.setItem('login', true);
-            console.log('Logged in successfully!');
             navigate('/Home');
         } catch (error) {
-            console.log('error ', errorAlert);
             setErrorAlert(true)
         }
     };
