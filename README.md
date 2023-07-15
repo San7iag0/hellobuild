@@ -34,6 +34,6 @@ To run the My GitHub Repository Manager app locally, follow these steps:
    - Once logged in, you will be redirected to the Dashboard page.
    - On the Dashboard, you can search your repositories by fill in your GitHub user name and clicking on search.
   
-4. Create your favorites Repositories
+4. Handle your favorites Repositories
    - You will be able to create a list of your favorites repositories by clicking on the heart
    - If you want to remove any repo from the list just unlike by clicking on the heart    
