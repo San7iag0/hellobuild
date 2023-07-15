@@ -29,7 +29,7 @@ export const Repo = ({name, link, iconHandle, handleHeart}:Props)  => {
                 <div className="repo__repoInfo">
                     <h3>Name: { name } </h3>
                     <div className="repo__heart" onClick={() => setHeart(!heart)}>
-                        {   
+                        {   iconHandle ? '' :
                             heart ?
                                 <FavoriteBorderRoundedIcon onClick={(event) => handleHeart(repoData)}/>
                             :

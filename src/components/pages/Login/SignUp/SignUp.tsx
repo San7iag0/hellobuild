@@ -3,25 +3,47 @@ import { ButtonMui } from "../../../UI/atoms/ButtonMui"
 import { InputMui } from "../../../UI/atoms/InputMui"
 import { useState } from 'react';
 import { auth } from '../../../../firebase';
+import { TransitionAlerts } from '../../../UI/atoms/AlertMui';
+import { log } from 'console';
 
 export const SignUp = () => {
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ Alert, setAlert ] = useState(false);
+    const [ errorAlert, setErrorAlert ] = useState('');
 
     const createAccount = async () => {
         try {
           await auth.createUserWithEmailAndPassword(email, password);
           console.log('sign up successfully!');
-        } catch (error) {
-          console.error(error);
+          setAlert(true)
+        } catch (error: any) {
+          setErrorAlert(error.message.split('(', 1)[0]);
         }
       };
 
+    const handelAlert = () => setAlert(false);
+    const errorHandelAlert = () => setErrorAlert('');
+
     return (
-        <div className="loginCcontainer">
+        <div className="loginContainer">
+            {
+                Alert ? 
+                <button onClick={handelAlert}>
+                    <TransitionAlerts severity='success' >Congratulations, your user has been created</TransitionAlerts> 
+                </button>
+                : ''
+            }
+            {
+                errorAlert != '' ? 
+                <button onClick={errorHandelAlert}>
+                    <TransitionAlerts severity='error' >{errorAlert}</TransitionAlerts> 
+                </button>
+                : ''
+            }
             <h2>Sign Up</h2>
-            <div className="loginCcontainer__form">
+            <div className="loginContainer__form">
                 <InputMui
                     style={{width: '65%'}}
                     type='text'
@@ -37,7 +59,7 @@ export const SignUp = () => {
                     onChange={(event) => setPassword(event)}
                 ></InputMui>
             </div>
-            <div className="loginCcontainer__btns">
+            <div className="loginContainer__btns">
                 <ButtonMui onClick={createAccount} variant='outlined'>Sign Up</ButtonMui>
             </div>
         </div>
