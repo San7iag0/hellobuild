@@ -28,7 +28,7 @@ export const Home = () => {
 
     const addFavRepos = (obj: any) => {
         //look for ducplications
-        const isDuplicate = saveData.some(data => data.name == obj.name)
+        const isDuplicate = saveData.some(data => data.name === obj.name)
         if(!isDuplicate){
             setSaveData(data => [...data, obj]);
         } else {
@@ -62,9 +62,6 @@ export const Home = () => {
                 <div className="homeContainer">
                     <div className="homeContainer__title">
                         <h2>Introduce your GitHub user name.</h2>
-                        {/* <Tooltip title="Introduce your GitHub user name to retrieve your repositories.">
-                            <InfoRoundedIcon color="info" />
-                        </Tooltip> */}
                     </div>
                     <div className="homeContainer__inputSearch">
                         <InputMui
@@ -105,7 +102,7 @@ export const Home = () => {
                     </div>
                 : '' }
                 { saveData.length > 0 ? 
-                    <div className="repoContainer">
+                    <div className="favContainer">
                     <h4>Favorite Repositories</h4>
                         {saveData.map((ele) => {
                             return(
