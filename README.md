@@ -22,7 +22,7 @@ To run the My GitHub Repository Manager app locally, follow these steps:
 
 1. Sign Up:
    - Navigate to the Sign Up page by clicking on the "Sign Up" button.
-   - Enter your desired username and password to create an account.
+   - Enter your desired Email and password to create an account.
    - Click on the "Sign Up" button to create your account.
 
 2. Login:
@@ -33,3 +33,7 @@ To run the My GitHub Repository Manager app locally, follow these steps:
 3. List Repositories:
    - Once logged in, you will be redirected to the Dashboard page.
    - On the Dashboard, you can search your repositories by fill in your GitHub user name and clicking on search.
+  
+4. Handle your favorites Repositories
+   - You will be able to create a list of your favorites repositories by clicking on the heart
+   - If you want to remove any repo from the list just unlike by clicking on the heart    
